@@ -1,4 +1,5 @@
 import 'package:antiscam/Chatbot.dart';
+import 'package:antiscam/Profile.dart';
 import 'package:antiscam/RankingHeader.dart';
 import 'package:antiscam/RewardsPoints.dart';
 import 'package:antiscam/ViewReport.dart';
@@ -810,6 +811,11 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => RewardsPoints()),
+        );
+      } else if (_selectedIndex == 4) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Profile()),
         );
       }
       
