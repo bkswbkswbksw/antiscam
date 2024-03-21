@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Creator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .card {
+            width: 70%;
+        }
+        
+        .container-fluid {
+            overflow-y: auto; 
+        }
+
+        .image-drop-zone {
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .image-drop-zone.hover {
+            background-color: #f0f0f0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid d-flex align-items-center justify-content-center">
+
+        <div class="card p-3 m-5">
+            <div class="card-body">
+                <div class="container-fluid d-flex align-items-center justify-content-between">
+                    <h2 class="card-title mb-4">Create Flashcards</h2>
+                    <div>
+                        <button type="button" class="btn btn-success" onclick="addFlashcard()">
+                            <i class="fas fa-plus">  </i>&nbsp;&nbsp;Add Question
+                        </button>
+                    </div>
+                </div>
+                
+                
+                <form id="flashcard-form">
+                    <div class="p-3 mb-3">
+
+                        <span class="fw-bold me-2">1. </span>
+
+                        <!-- Question Input -->
+                        <div class="form-group mb-4 mt-2">
+                            <label for="questionInput" class="pb-2 fs-6">Question</label>
+                            <textarea class="form-control" id="questionInput" rows="3" placeholder="Enter question" required></textarea>
+                        </div>
+                    
+                        <!-- Image Input -->
+                        <div class="form-group mb-4">
+                            <label for="imageInput" class="fs-6 pb-2">Question Image (optional):</label>
+                            <div id="imageDropZone" class="image-drop-zone" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                                <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
+                                <br>
+                                <span>Drag & Drop or Click to Upload</span>
+                            </div>
+                            <input class="form-control visually-hidden" type="file" id="imageInput" accept="image/*" onchange="handleFileSelect(event)">
+                        </div>
+
+                        <!-- Answer Input -->
+                        <div class="form-group mb-4">
+                            <label for="answerInput" class="pb-2 fs-6">Answer</label>
+                            <textarea class="form-control" id="answerInput" rows="3" placeholder="Enter answer" required></textarea>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Flashcards Container -->
+                    <div id="flashcards-container" class="mt-4">
+                    </div>
+                    
+                    <!-- Save Button -->
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        let questionNumber = 2; 
+
+        function addFlashcard() {
+            const flashcardsContainer = document.getElementById('flashcards-container');
+
+            // card container
+            const cardContainer = document.createElement('div');
+            cardContainer.classList.add('p-3', 'mb-4', 'position-relative'); // Add position-relative class
+
+            // question number element
+            const questionNumberElement = document.createElement('span');
+            questionNumberElement.textContent = questionNumber + '. '; // Set question number text
+            questionNumberElement.classList.add('fw-bold', 'me-2'); // Add font-weight-bold and margin class
+
+            // Increment question number for the next flashcard
+            questionNumber++;
+
+            // question input group
+            const questionInputGroup = document.createElement('div');
+            questionInputGroup.classList.add('form-group', 'mb-4', 'mt-2');
+
+            const questionLabel = document.createElement('label');
+            questionLabel.textContent = 'Question:';
+            questionLabel.htmlFor = 'questionInput';
+            questionInputGroup.appendChild(questionLabel);
+
+            const questionInput = document.createElement('input');
+            questionInput.classList.add('form-control');
+            questionInput.type = 'text';
+            questionInput.id = 'questionInput';
+            questionInput.placeholder = 'Enter question';
+            questionInput.required = true;
+            questionInputGroup.appendChild(questionInput);
+
+            // answer input group
+            const answerInputGroup = document.createElement('div');
+            answerInputGroup.classList.add('form-group', 'mb-4');
+
+            const answerLabel = document.createElement('label');
+            answerLabel.textContent = 'Answer:';
+            answerLabel.htmlFor = 'answerInput';
+            answerInputGroup.appendChild(answerLabel);
+
+            const answerInput = document.createElement('input');
+            answerInput.classList.add('form-control');
+            answerInput.type = 'text';
+            answerInput.id = 'answerInput';
+            answerInput.placeholder = 'Enter answer';
+            answerInput.required = true;
+            answerInputGroup.appendChild(answerInput);
+
+            // image input group
+            const imageInputGroup = document.createElement('div');
+            imageInputGroup.classList.add('form-group', 'mb-4');
+
+            const imageDropZone = document.createElement('div');
+            imageDropZone.id = 'imageDropZone';
+            imageDropZone.classList.add('image-drop-zone');
+            imageDropZone.setAttribute('ondrop', 'handleDrop(event)');
+            imageDropZone.setAttribute('ondragover', 'handleDragOver(event)');
+
+            const uploadIcon = document.createElement('i');
+            uploadIcon.classList.add('fas', 'fa-cloud-upload-alt', 'fa-2x', 'mb-2');
+
+            const uploadText = document.createElement('span');
+            uploadText.textContent = 'Drag & Drop or Click to Upload';
+
+            imageDropZone.appendChild(uploadIcon);
+            imageDropZone.appendChild(document.createElement('br'));
+            imageDropZone.appendChild(uploadText);
+
+            imageInputGroup.appendChild(imageDropZone);
+
+            // remove button container
+            const removeButtonContainer = document.createElement('div');
+            removeButtonContainer.classList.add('position-absolute', 'top-0', 'end-0', 'p-3'); // Position button container
+
+            // remove button
+            const removeButton = document.createElement('button');
+            removeButton.type = 'button';
+            removeButton.classList.add('btn', 'btn-outline-danger'); // Red border
+            removeButton.style.backgroundColor = 'white'; // White background
+            removeButton.onclick = function () {
+                cardContainer.remove();
+            };
+
+            // delete icon
+            const deleteIcon = document.createElement('i');
+            deleteIcon.classList.add('fas', 'fa-trash', 'text-danger'); // Red delete icon
+
+            // delete icon to remove button
+            removeButton.appendChild(deleteIcon);
+
+            // remove button to button container
+            removeButtonContainer.appendChild(removeButton);
+
+            // Append question number, input groups, and remove button container to card container
+            cardContainer.appendChild(questionNumberElement);
+            cardContainer.appendChild(questionInputGroup);
+            cardContainer.appendChild(imageInputGroup);
+            cardContainer.appendChild(answerInputGroup);
+            cardContainer.appendChild(removeButtonContainer);
+
+            // Append card container to flashcards container
+            flashcardsContainer.appendChild(cardContainer);
+
+            // Clear input fields after adding flashcard
+            questionInput.value = '';
+            answerInput.value = '';
+        }
+
+
+        function handleDragOver(event) {
+            event.preventDefault();
+            event.dataTransfer.dropEffect = 'copy';
+            const imageDropZone = document.getElementById('imageDropZone');
+            imageDropZone.classList.add('hover');
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            const imageDropZone = document.getElementById('imageDropZone');
+            imageDropZone.classList.remove('hover');
+            const file = event.dataTransfer.files[0];
+            const imageInput = document.getElementById('imageInput');
+            imageInput.files = event.dataTransfer.files; // Assign the dropped file to the input
+            handleFile(file);
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            handleFile(file);
+        }
+
+        function handleFile(file) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+                const imageInput = document.getElementById('imageInput');
+                const imageDropZone = document.getElementById('imageDropZone');
+                imageDropZone.innerHTML = `<img src="${event.target.result}" alt="Uploaded Image" style="max-width: 100%; max-height: 150px;">`;
+                imageInput.classList.add('visually-hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+</script>
+</body>
+
+</html>
+

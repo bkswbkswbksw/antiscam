@@ -45,9 +45,9 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image(
-              image: AssetImage('assets/shield_logo2.png'), // Replace 'your_logo_image.png' with the path to your logo image asset
-              width: 200.0, // Adjust width as needed
-              height: 200.0, // Adjust height as needed
+              image: AssetImage('assets/ScamHunter.jpg'), // Replace 'your_logo_image.png' with the path to your logo image asset
+              width: 260.0, // Adjust width as needed
+              height: 260.0, // Adjust height as needed
             ),
             // SizedBox(height: 16.0),
             // Text('Your Nursery App'),
