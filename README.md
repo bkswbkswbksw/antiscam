@@ -1,16 +1,8 @@
-# antiscam
+# Scam Hunter Mobile Application 
 
-A new Flutter project.
+This is an anti scam app that is developed exclusively for general users that aims to increase scam awareness as well as combat scams. 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The web application for the Regulatory Bodies and Financial Institutions is available here :
+https://github.com/bkswbkswbksw/fraudWeb
