@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-
 
 void main() {
   runApp(MaterialApp(
@@ -14,53 +12,11 @@ class RewardsPage extends StatefulWidget {
 }
 
 class _RewardsPageState extends State<RewardsPage> {
-  int totalPoints = 100; // Sample total collected points
+  int totalPoints = 100;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   leading: IconButton(
-      //     icon: Icon(Icons.arrow_back),
-      //     onPressed: () {
-      //       Navigator.pop(context);
-      //     },
-      //   ),
-      //   title: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //     children: [
-      //       Text(
-      //         'Rewards Redemption',
-      //         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      //       ),
-      //       Row(
-      //         children: [
-      //           Container(
-      //             padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      //             decoration: BoxDecoration(
-      //               color: Colors.grey[200],
-      //               borderRadius: BorderRadius.circular(8),
-      //             ),
-      //             child: Row(
-      //               children: [
-      //                 Text(
-      //                   '$totalPoints',
-      //                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-      //                 ),
-      //                 SizedBox(width: 4),
-      //                 Icon(
-      //                   Icons.monetization_on,
-      //                   size: 16,
-      //                   color: Colors.amber, // Set color to gold-like color
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
-      //         ],
-      //       ),
-      //     ],
-      //   ),
-      // ),
       body: Builder(
         builder: (context) => Center(
           child: SingleChildScrollView(
@@ -68,71 +24,55 @@ class _RewardsPageState extends State<RewardsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                   child: GradientButton(
                     text: 'Grab Food',
                     description: 'RM15 GrabFood eVoucher',
-                    gradientColors: [Color(0xffa8e063), Color(0xffEDE574)],
-                    points: 1500, // Add points value
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => LinearScaleQna(),
-                      //   ),
-                      // );
-                    },
+                    gradientColors: [
+                      const Color(0xffa8e063),
+                      const Color(0xffEDE574)
+                    ],
+                    points: 150000,
+                    onPressed: () {},
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                   child: GradientButton(
                     text: 'Shopee',
                     description: 'RM20 Shopee eVoucher',
-                    gradientColors: [Color(0xffa0e6ff), Color(0xffbac8fb)],
-                    points: 2500, // Add points value
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => LinearScaleQna(),
-                      //   ),
-                      // );
-                    },
+                    gradientColors: [
+                      const Color(0xffa0e6ff),
+                      const Color(0xffbac8fb)
+                    ],
+                    points: 250000,
+                    onPressed: () {},
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                   child: GradientButton(
                     text: 'Touch n Go',
                     description: 'RM20 TnG eWallet Credit',
-                    gradientColors: [Color(0xfffbe0ff), Color(0xfffeb7bf)],
-                    points: 2500, // Add points value
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => LinearScaleQna(),
-                      //   ),
-                      // );
-                    },
+                    gradientColors: [
+                      const Color(0xff8BA3E5),
+                      const Color(0xfff9ccff)
+                    ],
+                    points: 200000,
+                    onPressed: () {},
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                   child: GradientButton(
                     text: 'Prepaid Mobile Credit',
                     description: 'RM30 Prepaid Mobile Credit',
-                    gradientColors: [Color(0xff8BA3E5), Color(0xfff9ccff)],
-                    points: 4000, // Add points value
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => LinearScaleQna(),
-                      //   ),
-                      // );
-                    },
+                    gradientColors: [
+                      const Color(0xfffbe0ff),
+                      const Color(0xfffeb7bf)
+                    ],
+                    points: 300000,
+                    onPressed: () {},
                   ),
                 ),
               ],
@@ -148,7 +88,7 @@ class GradientButton extends StatelessWidget {
   final String text;
   final String description;
   final List<Color> gradientColors;
-  final int points; // Add points parameter
+  final int points;
   final VoidCallback? onPressed;
 
   const GradientButton({
@@ -156,7 +96,7 @@ class GradientButton extends StatelessWidget {
     required this.text,
     required this.description,
     required this.gradientColors,
-    required this.points, // Make points required
+    required this.points,
     this.onPressed,
   }) : super(key: key);
 
@@ -164,7 +104,7 @@ class GradientButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: gradientColors,
@@ -176,7 +116,7 @@ class GradientButton extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         child: Padding(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -185,21 +125,22 @@ class GradientButton extends StatelessWidget {
                 children: [
                   Text(
                     text,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                     ),
                   ),
                   Text(
                     description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 12,
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(15),
@@ -208,21 +149,22 @@ class GradientButton extends StatelessWidget {
                       children: [
                         Text(
                           '$points',
-                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(width: 4),
-                        Icon(
+                        const SizedBox(width: 4),
+                        const Icon(
                           Icons.monetization_on,
                           size: 16,
                           color: Colors.amber,
                         ),
-                        SizedBox(width: 4),
+                        const SizedBox(width: 4),
                       ],
                     ),
                   ),
                 ],
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward,
                 color: Colors.black,
               ),

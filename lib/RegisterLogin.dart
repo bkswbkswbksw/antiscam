@@ -1,47 +1,51 @@
+import 'package:antiscam/Login.dart';
+import 'package:antiscam/Register.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(LoginApp());
+  runApp(RegisterLogin());
 }
 
-class LoginApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Login Page',
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: LoginPage(),
-    );
-  }
-}
+// class RegisterLogin extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       title: 'Login Page',
+//       theme: ThemeData(
+//         primaryColor: Colors.blue,
+//         visualDensity: VisualDensity.adaptivePlatformDensity,
+//       ),
+//       home: RegisterLogin(),
+//     );
+//   }
+// }
 
-class LoginPage extends StatelessWidget {
+class RegisterLogin extends StatelessWidget {
+  const RegisterLogin({super.key});
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2, // Number of tabs
+      length: 2,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
           children: [
             Positioned(
-              top: 50, // Adjust the position of the logo as needed
+              top: 50,
               left: 0,
               right: 0,
               child: Center(
                 child: Image.asset(
-                  'assets/ScamHunter.jpg',
+                  'assets/SH_logo.png',
                   width: 190,
                   height: 190,
                 ),
               ),
             ),
             Positioned(
-              top: 210, // Adjust the position of the tab bar and tab view as needed
+              top: 210,
               left: 0,
               right: 0,
               bottom: 0,
@@ -51,16 +55,15 @@ class LoginPage extends StatelessWidget {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        // Login Tab
                         Center(
                           child: SingleChildScrollView(
                             child: Padding(
-                              padding: EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(16.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Join Us & Get Yourself Protected!',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -68,48 +71,59 @@ class LoginPage extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(height: 40.0),
-                                  Container(
-                                    // Your email TextField
-                                  ),
-                                  SizedBox(height: 25.0),
-                                  Container(
-                                    // Your password TextField
-                                  ),
-                                  SizedBox(height: 25.0),
+                                  const SizedBox(height: 40.0),
+                                  Container(),
+                                  const SizedBox(height: 25.0),
+                                  Container(),
+                                  const SizedBox(height: 25.0),
                                   ElevatedButton(
-                                    onPressed: () {},
-                                    child: Text('Login', style: TextStyle(color: Colors.white)),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Login()));
+                                    },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.black,
-                                      padding: EdgeInsets.symmetric(vertical: 16.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16.0),
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
                                     ),
+                                    child: const Text('Login',
+                                        style: TextStyle(color: Colors.white)),
                                   ),
-                                  SizedBox(height: 20.0),
+                                  const SizedBox(height: 20.0),
                                   TextButton(
-                                    onPressed: () {},
-                                    child: Text('Register', style: TextStyle(color: Colors.black)),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Register()));
+                                    },
                                     style: TextButton.styleFrom(
                                       backgroundColor: Colors.transparent,
-                                      padding: EdgeInsets.all(16.0),
+                                      padding: const EdgeInsets.all(16.0),
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
-                                        side: BorderSide(color: Colors.grey),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        side: const BorderSide(
+                                            color: Colors.grey),
                                       ),
                                     ),
+                                    child: const Text('Register',
+                                        style: TextStyle(color: Colors.black)),
                                   ),
-                                  SizedBox(height: 25.0),
+                                  const SizedBox(height: 25.0),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      // Text('Don\'t have an account?'),
-                                      // SizedBox(width: 4.0),
                                       TextButton(
                                         onPressed: () {},
-                                        child: Text(
+                                        child: const Text(
                                           'Forgot Password?',
                                           style: TextStyle(
                                             color: Colors.black,

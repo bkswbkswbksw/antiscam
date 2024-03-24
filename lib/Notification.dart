@@ -12,7 +12,6 @@ class NotificationsPage extends StatefulWidget {
 }
 
 class _NotificationsPageState extends State<NotificationsPage> {
-  // Sample data for notifications
   List<Map<String, dynamic>> notifications = [
     {
       'title': 'New Message',
@@ -32,10 +31,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
       'read': false,
       'timestamp': DateTime.now().subtract(Duration(days: 1)),
     },
-    // Add more sample notifications as needed
   ];
 
-  // Filtered list of notifications
   List<Map<String, dynamic>> filteredNotifications = [];
 
   @override
@@ -86,35 +83,26 @@ class _NotificationsPageState extends State<NotificationsPage> {
           final notification = filteredNotifications[index];
           return ListTile(
             leading: CircleAvatar(
-              backgroundColor: notification['read']
-                  ? Colors.grey[200] // Read notification color
-                  : Colors.lightGreen, // Unread notification color
+              backgroundColor:
+                  notification['read'] ? Colors.grey[200] : Colors.lightGreen,
               child: Icon(Icons.notifications),
             ),
-            // title: Text(notification['title']),
-            // subtitle: Text(notification['message']),
             title: Text(
               notification['title'],
               style: TextStyle(
-                fontWeight: notification['read'] ? FontWeight.normal : FontWeight.bold,
+                fontWeight:
+                    notification['read'] ? FontWeight.normal : FontWeight.bold,
               ),
             ),
             subtitle: Text(
               notification['message'],
               style: TextStyle(
-                fontWeight: notification['read'] ? FontWeight.normal : FontWeight.bold,
+                fontWeight:
+                    notification['read'] ? FontWeight.normal : FontWeight.bold,
               ),
             ),
-
             onTap: () {
-              // Add functionality to handle tap on notification
-              // For example, navigate to a detailed view of the notification
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => NotificationDetailsPage(notification: notification)),
-              // );
               setState(() {
-                // Mark notification as read when tapped
                 notification['read'] = true;
               });
             },

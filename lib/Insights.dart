@@ -12,10 +12,11 @@ class InsightsPage extends StatefulWidget {
   _InsightsPageState createState() => _InsightsPageState();
 }
 
-class _InsightsPageState extends State<InsightsPage> with TickerProviderStateMixin {
+class _InsightsPageState extends State<InsightsPage>
+    with TickerProviderStateMixin {
   late PageController _pageController;
   String selectedCategory = 'Online Scam Trends';
-  int _currentIndex = 0; // Add this variable to keep track of the current index
+  int _currentIndex = 0;
 
   @override
   void initState() {
@@ -25,7 +26,7 @@ class _InsightsPageState extends State<InsightsPage> with TickerProviderStateMix
 
   @override
   void dispose() {
-    _pageController.dispose(); // Dispose the page controller
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -33,9 +34,9 @@ class _InsightsPageState extends State<InsightsPage> with TickerProviderStateMix
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Insights'),
+        title: const Text('Insights'),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(48.0),
+          preferredSize: const Size.fromHeight(48.0),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -57,10 +58,9 @@ class _InsightsPageState extends State<InsightsPage> with TickerProviderStateMix
         },
         children: [
           _buildPieChart('Online Scam Trends', _getOnlineScamData()),
-          _buildDemographicAnalysisChart('Victim Demographic Analysis', _getDemographicData()),
-          // _buildBarChart('Scam Types Distribution', _getScamTypesData()),
+          _buildDemographicAnalysisChart(
+              'Victim Demographic Analysis', _getDemographicData()),
           _buildLineChart('Time Trend Analysis', _getTimeTrendData()),
-
         ],
       ),
     );
@@ -68,21 +68,21 @@ class _InsightsPageState extends State<InsightsPage> with TickerProviderStateMix
 
   Widget _buildTabButton(String title, int index) {
     return Container(
-      margin: EdgeInsets.only(right: 8),
+      margin: const EdgeInsets.only(right: 8),
       child: ElevatedButton(
         onPressed: () {
           setState(() {
             selectedCategory = title;
-            _pageController.jumpToPage(index); // Update the page controller
+            _pageController.jumpToPage(index);
           });
         },
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (states) {
               if (selectedCategory == title) {
-                return Colors.white; // Color when selected
+                return Colors.white;
               } else {
-                return Colors.black; // Default color
+                return Colors.black;
               }
             },
           ),
@@ -98,61 +98,59 @@ class _InsightsPageState extends State<InsightsPage> with TickerProviderStateMix
     );
   }
 
-Widget _buildPieChart(String title, List<Map<String, dynamic>> data) {
-  return Container(
-    padding: EdgeInsets.all(16),
-    child: Column(
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Expanded(
-          child: SfCircularChart(
-            legend: Legend(
-              isVisible: true,
-              position: LegendPosition.bottom,
-              overflowMode: LegendItemOverflowMode.wrap,
-            ),
-            series: <CircularSeries>[
-              PieSeries<Map<String, dynamic>, String>(
-                dataSource: data,
-                xValueMapper: (datum, _) => datum['label'],
-                yValueMapper: (datum, _) => datum['value'],
-                dataLabelSettings: DataLabelSettings(
-                  isVisible: true,
-                  labelPosition: ChartDataLabelPosition.outside,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-
-  Widget _buildBarChart(String title, List<Map<String, dynamic>> data) {
-    // Define a list of colors for the bars
-    List<Color> colors = [
-      Color(0xFFE27C7C),
-      Color(0xFFa86464),
-      Color(0xFF6d4b4b),
-      Color(0xFF503f3f),
-      Color(0xFF333333),
-    ];
-
+  Widget _buildPieChart(String title, List<Map<String, dynamic>> data) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Expanded(
+            child: SfCircularChart(
+              legend: Legend(
+                isVisible: true,
+                position: LegendPosition.bottom,
+                overflowMode: LegendItemOverflowMode.wrap,
+              ),
+              series: <CircularSeries>[
+                PieSeries<Map<String, dynamic>, String>(
+                  dataSource: data,
+                  xValueMapper: (datum, _) => datum['label'],
+                  yValueMapper: (datum, _) => datum['value'],
+                  dataLabelSettings: const DataLabelSettings(
+                    isVisible: true,
+                    labelPosition: ChartDataLabelPosition.outside,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBarChart(String title, List<Map<String, dynamic>> data) {
+    List<Color> colors = [
+      const Color(0xFFE27C7C),
+      const Color(0xFFa86464),
+      const Color(0xFF6d4b4b),
+      const Color(0xFF503f3f),
+      const Color(0xFF333333),
+    ];
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -164,8 +162,9 @@ Widget _buildPieChart(String title, List<Map<String, dynamic>> data) {
                   dataSource: data,
                   xValueMapper: (datum, _) => datum['label'],
                   yValueMapper: (datum, _) => datum['value'],
-                  dataLabelSettings: DataLabelSettings(isVisible: true),
-                  pointColorMapper: (datum, index) => colors[index % colors.length], // Assign colors from the list
+                  dataLabelSettings: const DataLabelSettings(isVisible: true),
+                  pointColorMapper: (datum, index) =>
+                      colors[index % colors.length],
                 ),
               ],
               primaryXAxis: CategoryAxis(),
@@ -176,122 +175,113 @@ Widget _buildPieChart(String title, List<Map<String, dynamic>> data) {
     );
   }
 
-Widget _buildLineChart(String title, List<Map<String, dynamic>> data) {
-  return Container(
-    padding: EdgeInsets.all(16),
-    child: Column(
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.only(top: 50, bottom: 50), // Add padding as needed
-            child: SfCartesianChart(
-              legend: Legend(isVisible: true),
-              series: <ChartSeries>[
-                LineSeries<Map<String, dynamic>, String>(
-                  dataSource: data,
-                  xValueMapper: (datum, _) => datum['label'],
-                  yValueMapper: (datum, _) => datum['value'],
-                  dataLabelSettings: DataLabelSettings(isVisible: true),
-                  color: Colors.red,
-                  name: 'Online Scam', 
-                ),
-                LineSeries<Map<String, dynamic>, String>(
-                  dataSource: _getPhysicalScamData(), // Assuming you have a method to get physical scam data
-                  xValueMapper: (datum, _) => datum['label'],
-                  yValueMapper: (datum, _) => datum['value'],
-                  dataLabelSettings: DataLabelSettings(isVisible: true),
-                  color: Colors.black, 
-                  name: 'Physical Scam', 
-                ),
-              ],
-              primaryXAxis: CategoryAxis(),
+  Widget _buildLineChart(String title, List<Map<String, dynamic>> data) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
-        ),
-      ],
-    ),
-  );
-}
-
-Widget _buildDemographicAnalysisChart(String title, List<Map<String, dynamic>> data) {
-  // Define a list of colors for each bar
-  List<Color> colors = [
-    // Colors.lightBlue,
-    Colors.red.shade200,
-    Colors.orange.shade200,
-    Colors.yellow.shade200,
-    Colors.green.shade200,
-    Colors.teal.shade200,
-    Colors.indigo.shade200,
-    Colors.purple.shade200,
-    Colors.pink.shade200,
-    Colors.cyan.shade200,
-  ];
-
-  return Container(
-    padding: EdgeInsets.all(16),
-    child: Column(
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.only(top: 50, bottom: 50),
-          child: SfCartesianChart(
-            series: <ChartSeries>[
-              BarSeries<Map<String, dynamic>, String>(
-                dataSource: data,
-                xValueMapper: (datum, _) => datum['demographic'],
-                yValueMapper: (datum, _) => datum['value'],
-                dataLabelSettings: DataLabelSettings(isVisible: true),
-                pointColorMapper: (datum, index) => colors[index % colors.length], // Assign colors from the list
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 50, bottom: 50),
+              child: SfCartesianChart(
+                legend: Legend(isVisible: true),
+                series: <ChartSeries>[
+                  LineSeries<Map<String, dynamic>, String>(
+                    dataSource: data,
+                    xValueMapper: (datum, _) => datum['label'],
+                    yValueMapper: (datum, _) => datum['value'],
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                    color: Colors.red,
+                    name: 'Online Scam',
+                  ),
+                  LineSeries<Map<String, dynamic>, String>(
+                    dataSource: _getPhysicalScamData(),
+                    xValueMapper: (datum, _) => datum['label'],
+                    yValueMapper: (datum, _) => datum['value'],
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                    color: Colors.black,
+                    name: 'Physical Scam',
+                  ),
+                ],
+                primaryXAxis: CategoryAxis(),
               ),
-            ],
-            primaryXAxis: CategoryAxis(),
-            primaryYAxis: NumericAxis(isVisible: false),
+            ),
           ),
-        ),
-        ),
-      ],
-    ),
-  );
-}
+        ],
+      ),
+    );
+  }
 
+  Widget _buildDemographicAnalysisChart(
+      String title, List<Map<String, dynamic>> data) {
+    List<Color> colors = [
+      Colors.red.shade200,
+      Colors.orange.shade200,
+      Colors.yellow.shade200,
+      Colors.green.shade200,
+      Colors.teal.shade200,
+      Colors.indigo.shade200,
+      Colors.purple.shade200,
+      Colors.pink.shade200,
+      Colors.cyan.shade200,
+    ];
 
+    return Container(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 50, bottom: 50),
+              child: SfCartesianChart(
+                series: <ChartSeries>[
+                  BarSeries<Map<String, dynamic>, String>(
+                    dataSource: data,
+                    xValueMapper: (datum, _) => datum['demographic'],
+                    yValueMapper: (datum, _) => datum['value'],
+                    dataLabelSettings: const DataLabelSettings(isVisible: true),
+                    pointColorMapper: (datum, index) =>
+                        colors[index % colors.length],
+                  ),
+                ],
+                primaryXAxis: CategoryAxis(),
+                primaryYAxis: NumericAxis(isVisible: false),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-  // List<Map<String, dynamic>> _getOnlineScamData() {
-  //   return [
-  //     {'label': 'Phishing', 'value': 30},
-  //     {'label': 'Hacking', 'value': 20},
-  //     {'label': 'Identity Theft', 'value': 15},
-  //   ];
-  // }
   List<Map<String, dynamic>> _getOnlineScamData() {
-  return [
-    {'label': 'Phone', 'value': 10},
-    {'label': 'Malware', 'value': 8},
-    {'label': 'Job', 'value': 6},
-    {'label': 'Phishing', 'value': 12},
-    {'label': 'Mule Account', 'value': 5},
-    {'label': 'E-Commerce', 'value': 7},
-    {'label': 'Investment', 'value': 9},
-    {'label': 'Cash Reward', 'value': 4},
-    {'label': 'Loan', 'value': 3},
-    {'label': 'Love Schemes', 'value': 6},
-  ];
-}
+    return [
+      {'label': 'Phone', 'value': 10},
+      {'label': 'Malware', 'value': 8},
+      {'label': 'Job', 'value': 6},
+      {'label': 'Phishing', 'value': 12},
+      {'label': 'Mule Account', 'value': 5},
+      {'label': 'E-Commerce', 'value': 7},
+      {'label': 'Investment', 'value': 9},
+      {'label': 'Cash Reward', 'value': 4},
+      {'label': 'Loan', 'value': 3},
+      {'label': 'Love Schemes', 'value': 6},
+    ];
+  }
 
   List<Map<String, dynamic>> _getScamTypesData() {
     return [
@@ -302,31 +292,30 @@ Widget _buildDemographicAnalysisChart(String title, List<Map<String, dynamic>> d
     ];
   }
 
-List<Map<String, dynamic>> _getPhysicalScamData() {
-  return [
-    {'label': 'Oct', 'value': 45}, 
-    {'label': 'Nov', 'value': 66},
-    {'label': 'Dec', 'value': 88},
-    {'label': 'Jan', 'value': 100},
-    {'label': 'Feb', 'value': 40},
-    {'label': 'Mar', 'value': 55},
-  ];
-}
+  List<Map<String, dynamic>> _getPhysicalScamData() {
+    return [
+      {'label': 'Oct', 'value': 45},
+      {'label': 'Nov', 'value': 66},
+      {'label': 'Dec', 'value': 88},
+      {'label': 'Jan', 'value': 100},
+      {'label': 'Feb', 'value': 40},
+      {'label': 'Mar', 'value': 55},
+    ];
+  }
 
-List<Map<String, dynamic>> _getDemographicData() {
-  return [
-    {'demographic': 'Age', 'value': 30},
-    {'demographic': 'Gender', 'value': 20},
-    {'demographic': 'Income\nLevel', 'value': 15},
-    {'demographic': 'Occupation', 'value': 25},
-    {'demographic': 'Geographic\nLocation', 'value': 18},
-    {'demographic': 'Education\nLevel', 'value': 22},
-    {'demographic': 'Social\nMedia\nPresence', 'value': 28},
-    {'demographic': 'Family\nStatus', 'value': 32},
-    {'demographic': 'Other', 'value': 10},
-  ];
-}
-
+  List<Map<String, dynamic>> _getDemographicData() {
+    return [
+      {'demographic': 'Age', 'value': 30},
+      {'demographic': 'Gender', 'value': 20},
+      {'demographic': 'Income\nLevel', 'value': 15},
+      {'demographic': 'Occupation', 'value': 25},
+      {'demographic': 'Geographic\nLocation', 'value': 18},
+      {'demographic': 'Education\nLevel', 'value': 22},
+      {'demographic': 'Social\nMedia\nPresence', 'value': 28},
+      {'demographic': 'Family\nStatus', 'value': 32},
+      {'demographic': 'Other', 'value': 10},
+    ];
+  }
 
   List<Map<String, dynamic>> _getTimeTrendData() {
     return [

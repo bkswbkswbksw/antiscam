@@ -27,10 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // Simulate a time-consuming task (e.g., loading data) for the splash screen.
-    // Replace this with your actual data loading logic.
     Future.delayed(
-      Duration(seconds: 2),
+      const Duration(seconds: 2),
       () {
         Navigator.pushReplacementNamed(context, '/home');
       },
@@ -39,18 +37,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image(
-              image: AssetImage('assets/ScamHunter.jpg'), // Replace 'your_logo_image.png' with the path to your logo image asset
-              width: 260.0, // Adjust width as needed
-              height: 260.0, // Adjust height as needed
+              image: AssetImage('assets/logo.png'),
+              width: 260.0,
+              height: 260.0,
             ),
-            // SizedBox(height: 16.0),
-            // Text('Your Nursery App'),
           ],
         ),
       ),
@@ -63,9 +59,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Screen'),
+        title: const Text('Home Screen'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Welcome to your home screen!'),
       ),
     );

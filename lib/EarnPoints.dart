@@ -21,7 +21,7 @@ class EarnPoints extends StatefulWidget {
 }
 
 class _EarnPointsState extends State<EarnPoints> {
-  int totalPoints = 100; 
+  int totalPoints = 100;
 
   @override
   Widget build(BuildContext context) {
@@ -32,39 +32,44 @@ class _EarnPointsState extends State<EarnPoints> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 12),
+                padding: const EdgeInsets.symmetric(vertical: 12),
                 child: SizedBox(
                   height: 122,
                   child: GradientButton(
-                    text: 'Quiz',
+                    text: 'Flashcard and Quiz',
                     icon: Icons.question_answer,
-                    description: '\nEarn points by taking a quiz',
-                    gradientColors: [Color(0xffa8e063), Color(0xffEDE574)],
-                    iconColor: Colors.black, 
+                    description: '\nTake quiz to earn points!',
+                    gradientColors: [
+                      const Color(0xffa8e063),
+                      const Color(0xffEDE574)
+                    ],
+                    iconColor: Colors.black,
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => FlashcardQuiz(),
                         ),
                       );
-
                     },
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 12),
+                padding: const EdgeInsets.symmetric(vertical: 12),
                 child: SizedBox(
                   height: 122,
                   child: GradientButton(
                     text: 'Ads',
                     icon: Icons.video_library,
                     description: '\nWatch an ads to get points ',
-                    gradientColors: [Color(0xffa0e6ff), Color(0xffbac8fb)],
-                    iconColor: Colors.black, 
+                    gradientColors: [
+                      const Color(0xffa0e6ff),
+                      const Color(0xffbac8fb)
+                    ],
+                    iconColor: Colors.black,
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => WatchAds(),
@@ -74,49 +79,32 @@ class _EarnPointsState extends State<EarnPoints> {
                   ),
                 ),
               ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    child: SizedBox(
-                      height: 122, // Set your desired height here
-                      child: GradientButton(
-                        text: 'Subscription',
-                        icon: Icons.subscriptions,
-                        description: '\nSubscribe Financial Fraud Alert',
-                        gradientColors: [Color(0xfffbe0ff), Color(0xfffeb7bf)],
-                        iconColor: Colors.black, 
-                        // onPressed: () {
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => LongTextQna(),
-                        //     ),
-                        //   );
-                        // },
-                      ),
-                    ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 12),
+                child: SizedBox(
+                  height: 122,
+                  child: GradientButton(
+                    text: 'Subscription',
+                    icon: Icons.subscriptions,
+                    description: '\nSubscribe Financial Fraud Alert',
+                    gradientColors: [Color(0xff8BA3E5), Color(0xfff9ccff)],
+                    iconColor: Colors.black,
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    child: SizedBox(
-                      height: 122, // Set your desired height here
-                      child: GradientButton(
-                        text: 'Earn Points',
-                        icon: Icons.monetization_on_sharp,
-                        description: '\nUse points to redeem rewards',
-                        gradientColors: [Color(0xff8BA3E5), Color(0xfff9ccff)],
-                        iconColor: Colors.black, 
-                        // onPressed: () {
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => PollMultipleSelectionQna(),
-                        //     ),
-                        //   );
-                        // },
-                      ),
-                    ),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 12),
+                child: SizedBox(
+                  height: 122,
+                  child: GradientButton(
+                    text: 'Earn Points',
+                    icon: Icons.monetization_on_sharp,
+                    description: '\nUse points to redeem rewards',
+                    gradientColors: [Color(0xfffbe0ff), Color(0xfffeb7bf)],
+                    iconColor: Colors.black,
                   ),
-
+                ),
+              ),
             ],
           ),
         ),
@@ -147,7 +135,7 @@ class GradientButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: 20),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: gradientColors,
@@ -159,7 +147,7 @@ class GradientButton extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         child: Padding(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -172,10 +160,10 @@ class GradientButton extends StatelessWidget {
                         icon,
                         color: iconColor,
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Text(
                         text,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
                         ),
@@ -184,14 +172,14 @@ class GradientButton extends StatelessWidget {
                   ),
                   Text(
                     description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 12,
                     ),
                   ),
                 ],
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward,
                 color: Colors.black,
               ),

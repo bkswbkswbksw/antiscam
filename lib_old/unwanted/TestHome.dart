@@ -4,7 +4,7 @@ import 'package:antiscam/RankingHeader.dart';
 import 'package:antiscam/RewardsPoints.dart';
 import 'package:antiscam/ViewReport.dart';
 import 'package:flutter/material.dart';
-import 'AddReport.dart';
+// import 'AddReport.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 void main() {
@@ -840,6 +840,7 @@ Padding(
                             color: Colors.black45
                           ),
                           ),
+                          Icon(Icons.card_giftcard_rounded, color: Colors.purple[200]),
                         ],
                       ),
                     ],
@@ -907,10 +908,10 @@ Padding(
         );
       } 
       else if (_selectedIndex == 2) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => AddReportPage()),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => AddReportPage()),
+        // );
       } else if (_selectedIndex == 3) {
         Navigator.push(
           context,

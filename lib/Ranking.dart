@@ -7,9 +7,12 @@ class RankingPage extends StatefulWidget {
 
 class _RankingPageState extends State<RankingPage> {
   List<RankingTileData> rankingTiles = [
-    RankingTileData(1, 'Trade Trax', 'Gold Medal', Icons.emoji_events, Colors.amber, 4.8, 2),
-    RankingTileData(2, 'Token Trend', 'Silver Medal', Icons.emoji_events, Colors.grey, 4.5, -1),
-    RankingTileData(3, 'Forex Frontier', 'Bronze Medal', Icons.emoji_events, Colors.brown, 4.3, 0),
+    RankingTileData(1, 'Trade Trax', 'Gold Medal', Icons.emoji_events,
+        Colors.amber, 4.8, 2),
+    RankingTileData(2, 'Token Trend', 'Silver Medal', Icons.emoji_events,
+        Colors.grey, 4.5, -1),
+    RankingTileData(3, 'Forex Frontier', 'Bronze Medal', Icons.emoji_events,
+        Colors.brown, 4.3, 0),
     RankingTileData(4, 'Secure Swipe', '', null, null, 4.0, 0),
     RankingTileData(5, 'Money Mastery', '', null, null, 3.7, 3),
     RankingTileData(6, 'Pay Paladin', '', null, null, 2.5, 2),
@@ -17,31 +20,21 @@ class _RankingPageState extends State<RankingPage> {
     RankingTileData(8, 'Trade Trax', '', null, null, 1.9, -2),
     RankingTileData(9, 'Coin Cloud', '', null, null, 1.8, -1),
     RankingTileData(10, 'Currency Chase', '', null, null, 1.4, -3),
-
   ];
 
   @override
   Widget build(BuildContext context) {
-    // Sort ranking tiles based on rating
     rankingTiles.sort((a, b) => b.rating.compareTo(a.rating));
 
-    return 
-    // Scaffold(
-    //   appBar: AppBar(
-    //     title: Text('Ranking'),
-    //   ),
-    //   body: 
-      Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: rankingTiles
-                .map((tile) => _buildRankingTile(tile))
-                .toList(),
-          ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children:
+              rankingTiles.map((tile) => _buildRankingTile(tile)).toList(),
         ),
-      // ),
+      ),
     );
   }
 
@@ -61,7 +54,6 @@ class _RankingPageState extends State<RankingPage> {
       rankChangeText = '-';
     }
 
-    // Check if rating is 2.0 or below
     Color tileColor = tileData.rating <= 2.0 ? Colors.red[100]! : Colors.white;
 
     return Container(

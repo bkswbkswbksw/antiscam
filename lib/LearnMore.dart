@@ -36,13 +36,14 @@ class ScamCategoriesPage extends StatelessWidget {
                     children: [
                       Text(
                         '100',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 4),
                       Icon(
                         Icons.monetization_on,
                         size: 16,
-                        color: Colors.amber, 
+                        color: Colors.amber,
                       ),
                     ],
                   ),
@@ -105,100 +106,44 @@ class ScamCategoriesPage extends StatelessWidget {
     );
   }
 
-// Widget _buildCategoryTile({required String title, required String image}) {
-//   return GestureDetector(
-//     onTap: () {
-//       // Navigate to category details page
-//     },
-//     child: Container(
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.circular(10.0),
-//         boxShadow: [
-//           BoxShadow(
-//             color: Colors.grey.withOpacity(0.5),
-//             spreadRadius: 3,
-//             blurRadius: 5,
-//             offset: Offset(0, 3),
-//           ),
-//         ],
-//       ),
-//       child: ClipRRect(
-//         borderRadius: BorderRadius.circular(10.0),
-//         child: Stack(
-//           alignment: Alignment.bottomLeft,
-//           children: [
-//             Image.asset(
-//               image,
-//               fit: BoxFit.cover,
-//               width: double.infinity,
-//               height: double.infinity,
-//             ),
-//             Container(
-//               padding: EdgeInsets.all(5.0),
-//               decoration: BoxDecoration(
-//                 color: Colors.black.withOpacity(0.7),
-//               ),
-//               child: FittedBox(
-//                 fit: BoxFit.scaleDown,
-//                 alignment: Alignment.centerRight,
-//                 child: Text(
-//                   title,
-//                   style: TextStyle(
-//                     color: Colors.white,
-//                     fontSize: 14.0,
-//                     fontWeight: FontWeight.bold,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     ),
-//   );
-// }
-
-Widget _buildCategoryTile({required String title, required String image}) {
-  return GestureDetector(
-    onTap: () {
-      // Navigate to category details page
-    },
-    child: Card(
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            Image.asset(
-              image,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
-            ),
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(5.0),
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.7),
+  Widget _buildCategoryTile({required String title, required String image}) {
+    return GestureDetector(
+      onTap: () {},
+      child: Card(
+        elevation: 5.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Stack(
+            alignment: Alignment.bottomLeft,
+            children: [
+              Image.asset(
+                image,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
               ),
-              child: Text(
-                title,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.bold,
+              Container(
+                width: double.infinity,
+                padding: EdgeInsets.all(5.0),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.7),
+                ),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
-  );
-}
-
+    );
+  }
 }

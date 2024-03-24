@@ -7,7 +7,7 @@ void main() {
 class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Profile',
       home: ProfileScreen(),
     );
@@ -15,9 +15,9 @@ class Profile extends StatelessWidget {
 }
 
 class ProfileScreen extends StatelessWidget {
-  final String username = "Penelope Johnson"; // User's name
-  final String level = "Innocent"; // User's level
-  final int points = 100; // User's points
+  final String username = "Penelope Johnson";
+  final String level = "Innocent";
+  final int points = 100;
 
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -26,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -34,29 +34,31 @@ class ProfileScreen extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Profile',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Text(
                         '100',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 4),
                       Icon(
                         Icons.monetization_on,
                         size: 16,
-                        color: Colors.amber, 
+                        color: Colors.amber,
                       ),
                     ],
                   ),
@@ -66,20 +68,12 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-            body: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(20.0),
-          // decoration: BoxDecoration(
-          //   color: Colors.grey[200], // Background color
-          //   borderRadius: BorderRadius.only(
-          //     bottomLeft: Radius.circular(20.0),
-          //     bottomRight: Radius.circular(20.0),
-          //   ),
-          // ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // User's Image and Edit Icon
               Stack(
                 children: [
                   SizedBox(
@@ -88,10 +82,10 @@ class ProfileScreen extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: Container(
-                        color: Colors.blue, // Placeholder color
-                        child: Center(
+                        color: Colors.blue,
+                        child: const Center(
                           child: Text(
-                            'PJ', // Initials
+                            'PJ',
                             style: TextStyle(fontSize: 40, color: Colors.white),
                           ),
                         ),
@@ -118,59 +112,60 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              // User's Name
               Text(
                 username,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 10),
-              // User's Level
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Anti-Scammer',
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(width: 5), // Spacer between text and icon
+                  const SizedBox(width: 5),
                   Image.asset(
-                    'assets/goldCrown.png', // Path to your crown image asset
-                    width: 30, // Adjust the width of the image as needed
-                    height: 30, // Adjust the height of the image as needed
+                    'assets/goldCrown.png',
+                    width: 30,
+                    height: 30,
                   ),
                 ],
               ),
-              // const SizedBox(height: 10),
-              // // User's Points
-              // Text(
-              //   'Points: $points',
-              //   style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-              // ),
               const SizedBox(height: 20),
-              // Edit Profile Button
               SizedBox(
                 width: 200,
                 child: ElevatedButton(
-                  onPressed: () => Navigator.pushNamed(context, '/update_profile'),
+                  onPressed: () =>
+                      Navigator.pushNamed(context, '/update_profile'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     shape: const StadiumBorder(),
                   ),
-                  child: const Text('Edit Profile', style: TextStyle(color: Colors.white)),
+                  child: const Text('Edit Profile',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ),
               const SizedBox(height: 30),
-
               const Divider(),
               const SizedBox(height: 20),
-              // Other Menu Options
-              ProfileMenuWidget(title: "Settings", icon: Icons.settings, onPress: () {}),
-              ProfileMenuWidget(title: "User Management", icon: Icons.group, onPress: () {}),
+              ProfileMenuWidget(
+                  title: "My reports", icon: Icons.report, onPress: () {}),
+              ProfileMenuWidget(
+                  title: "Settings", icon: Icons.settings, onPress: () {}),
+              ProfileMenuWidget(
+                  title: "User Management", icon: Icons.group, onPress: () {}),
               const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 20),
-              ProfileMenuWidget(title: "Information", icon: Icons.info, onPress: () {}),
-              ProfileMenuWidget(title: "Logout", icon: Icons.logout, textColor: Colors.red, onPress: () {}),
+              ProfileMenuWidget(
+                  title: "Information", icon: Icons.info, onPress: () {}),
+              ProfileMenuWidget(
+                  title: "Logout",
+                  icon: Icons.logout,
+                  textColor: Colors.red,
+                  onPress: () {}),
             ],
           ),
         ),
@@ -205,7 +200,9 @@ class ProfileMenuWidget extends StatelessWidget {
             const SizedBox(width: 20),
             Text(
               title,
-              style: TextStyle(color: textColor ?? Theme.of(context).textTheme.bodyText1?.color),
+              style: TextStyle(
+                  color: textColor ??
+                      Theme.of(context).textTheme.bodyText1?.color),
             ),
           ],
         ),

@@ -57,7 +57,14 @@ class _ChatPageState extends State<ChatPage> {
     },
   ];
 
-  List<String> questionTypes = ['Phishing', 'Macau Scams', 'Mule Account Scams', 'Loan Scams', 'Love Scams', 'Investment Scams'];
+  List<String> questionTypes = [
+    'Phishing',
+    'Macau Scams',
+    'Mule Account Scams',
+    'Loan Scams',
+    'Love Scams',
+    'Investment Scams'
+  ];
 
   List<Widget> _buildFaqCategories() {
     List<Widget> categories = [];
@@ -84,9 +91,10 @@ class _ChatPageState extends State<ChatPage> {
 
   Widget _buildCategoryTile(Map<String, dynamic> category) {
     return ListTile(
-      title: Text(category['category'],
-      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500), 
-    ),
+      title: Text(
+        category['category'],
+        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+      ),
       onTap: () {
         print('Category clicked: ${category['category']}');
       },
@@ -108,8 +116,8 @@ class _ChatPageState extends State<ChatPage> {
         },
         child: Text(questionType),
         style: ElevatedButton.styleFrom(
-          primary: Colors.black,
-          onPrimary: Colors.white,
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.black,
         ),
       ),
     );
@@ -155,13 +163,14 @@ class _ChatPageState extends State<ChatPage> {
             child: Row(
               children: [
                 SizedBox(width: 8),
-                for (var questionType in questionTypes) _buildQuestionButton(questionType),
+                for (var questionType in questionTypes)
+                  _buildQuestionButton(questionType),
               ],
             ),
           ),
           SizedBox(height: 8),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10), 
+            padding: EdgeInsets.symmetric(horizontal: 10),
             child: Row(
               children: [
                 Expanded(
@@ -175,8 +184,9 @@ class _ChatPageState extends State<ChatPage> {
                         borderRadius: BorderRadius.circular(30.0),
                         borderSide: BorderSide.none,
                       ),
-                      contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                      hintStyle: TextStyle(fontSize: 14), 
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                      hintStyle: TextStyle(fontSize: 14),
                     ),
                   ),
                 ),
@@ -192,7 +202,6 @@ class _ChatPageState extends State<ChatPage> {
               ],
             ),
           ),
-
         ],
       ),
     );

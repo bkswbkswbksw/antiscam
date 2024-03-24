@@ -2,8 +2,6 @@ import 'package:antiscam/EarnPoints.dart';
 import 'package:antiscam/RewardsRedemption.dart';
 import 'package:flutter/material.dart';
 
-
-
 void main() {
   runApp(RewardsPoints());
 }
@@ -22,7 +20,8 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -42,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -50,29 +49,31 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Rewards',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Text(
                         '100',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 4),
                       Icon(
                         Icons.monetization_on,
                         size: 16,
-                        color: Colors.amber, 
+                        color: Colors.amber,
                       ),
                     ],
                   ),
@@ -81,26 +82,26 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
             ),
           ],
         ),
-bottom: TabBar(
-  controller: _tabController,
-  tabs: [
-    Tab(
-      child: Text(
-        'Earn Points',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12), 
-      ),
-    ),
-    Tab(
-      child: Text(
-        'Rewards Redemption',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13), 
-      ),
-    ),
-  ],
-  labelColor: Colors.black, 
-  unselectedLabelColor: Colors.grey, 
-  indicatorColor: Colors.black,
-),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: const [
+            Tab(
+              child: Text(
+                'Earn Points',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+              ),
+            ),
+            Tab(
+              child: Text(
+                'Rewards Redemption',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              ),
+            ),
+          ],
+          labelColor: Colors.black,
+          unselectedLabelColor: Colors.grey,
+          indicatorColor: Colors.black,
+        ),
       ),
       body: TabBarView(
         controller: _tabController,

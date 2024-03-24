@@ -10,15 +10,13 @@ class AddReportPage extends StatefulWidget {
 }
 
 class _AddReportPageState extends State<AddReportPage> {
-
   List<String> _attachments = [];
 
-// Upload Attachments 
   Future<void> _pickFiles() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: true,
       type: FileType.custom,
-      allowedExtensions: ['pdf', 'jpg', 'png'], // Add more extensions as needed
+      allowedExtensions: ['pdf', 'jpg', 'png'],
     );
     if (result != null) {
       List<String> paths = result.paths.map((path) => path!).toList();
@@ -28,28 +26,27 @@ class _AddReportPageState extends State<AddReportPage> {
     }
   }
 
-// Attachment Image Preview
   Widget _buildPreview(int index, String filePath) {
     if (filePath.endsWith('.jpg') || filePath.endsWith('.png')) {
       return Container(
-        width: 100, 
-        height: 100, 
+        width: 100,
+        height: 100,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8), 
+          borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5), 
-              spreadRadius: 2, 
-              blurRadius: 5, 
-              offset: Offset(0, 3), 
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
             ),
           ],
-          color: Colors.white, 
+          color: Colors.white,
         ),
         child: Stack(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8), 
+              borderRadius: BorderRadius.circular(8),
               child: Image.file(
                 File(filePath),
                 fit: BoxFit.cover,
@@ -59,16 +56,16 @@ class _AddReportPageState extends State<AddReportPage> {
               top: 0,
               right: 0,
               child: Container(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.7),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(8),
                   ),
                 ),
                 child: Text(
-                  '${index + 1}', 
-                  style: TextStyle(
+                  '${index + 1}',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
@@ -79,19 +76,19 @@ class _AddReportPageState extends State<AddReportPage> {
         ),
       );
     } else if (filePath.endsWith('.pdf')) {
-      return Text('PDF Preview');
+      return const Text('PDF Preview');
     } else {
-      return Text('** Unsupported File Type **', 
+      return const Text(
+        '** Unsupported File Type **',
         style: TextStyle(
-          color: Colors.red, 
-          fontWeight: FontWeight.w900, 
-          fontSize: 10, 
+          color: Colors.red,
+          fontWeight: FontWeight.w900,
+          fontSize: 10,
           fontStyle: FontStyle.italic,
         ),
       );
     }
   }
-
 
   int _currentStep = 1;
   TextEditingController _titleController = TextEditingController();
@@ -100,11 +97,11 @@ class _AddReportPageState extends State<AddReportPage> {
   String? _selectedLocation;
   bool _isCheckedAge = false;
   bool _isCheckedGender = false;
-  bool _isCheckedIncome  = false;
+  bool _isCheckedIncome = false;
   bool _isCheckedOccupation = false;
   bool _isCheckedLocation = false;
-  bool _isCheckedEducation  = false;
-  bool _isCheckedSocialMedia   = false;
+  bool _isCheckedEducation = false;
+  bool _isCheckedSocialMedia = false;
   bool _isCheckedFamilyStatus = false;
   bool _isCheckedOther = false;
   String? _selectedGender;
@@ -118,8 +115,8 @@ class _AddReportPageState extends State<AddReportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -127,29 +124,31 @@ class _AddReportPageState extends State<AddReportPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            const Text(
               'Add Report',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Text(
                         '100',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 4),
                       Icon(
                         Icons.monetization_on,
                         size: 16,
-                        color: Colors.amber, 
+                        color: Colors.amber,
                       ),
                     ],
                   ),
@@ -160,13 +159,12 @@ class _AddReportPageState extends State<AddReportPage> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Progress bar
             Container(
-              margin: EdgeInsets.symmetric(vertical: 16.0),
+              margin: const EdgeInsets.symmetric(vertical: 16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -178,41 +176,30 @@ class _AddReportPageState extends State<AddReportPage> {
                 ],
               ),
             ),
-            // // Description
-            // Text(
-            //   _getDescription(_currentStep),
-            //   style: TextStyle(
-            //     fontWeight: FontWeight.bold,
-            //     fontSize: 16,
-            //   ),
-            // ),
-            // SizedBox(height: 20.0),
-            // Title
             if (_currentStep == 1) ...[
-              Text(
+              const Text(
                 '1. Title',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-            SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
-              style: TextStyle(
-                fontSize: 13, 
-              ),
-              controller: _titleController,
-              decoration: InputDecoration(
-                labelText: 'Title',
-                filled: true,
-                fillColor: Colors.grey[200],
-                border: InputBorder.none, 
-                labelStyle: TextStyle(
-                  fontSize: 12, 
+                style: const TextStyle(
+                  fontSize: 13,
                 ),
+                controller: _titleController,
+                decoration: InputDecoration(
+                  labelText: 'Title',
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  border: InputBorder.none,
+                  labelStyle: const TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                maxLines: 2,
               ),
-              maxLines: 2,
-            ),
-              SizedBox(height: 20.0),
-              // Scam Types Radio Buttons
-              Text(
+              const SizedBox(height: 20.0),
+              const Text(
                 '2. Scam Types',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -227,7 +214,7 @@ class _AddReportPageState extends State<AddReportPage> {
                       });
                     },
                   ),
-                  Text('Online Scam'),
+                  const Text('Online Scam'),
                   Radio(
                     value: 'Physical Scam',
                     groupValue: _selectedScamType,
@@ -237,788 +224,767 @@ class _AddReportPageState extends State<AddReportPage> {
                       });
                     },
                   ),
-                  Text('Physical Scam'),
+                  const Text('Physical Scam'),
                 ],
-              ),   
-              SizedBox(height: 20.0),
-              // Implement Radio buttons for scam types
-              // Implement logic to select online or physical scam
-                if (_selectedScamType == 'Online Scam') ...[
-                  Text('3. Select Platform:', 
-                      style: TextStyle(fontWeight: FontWeight.bold),),
-                  Container(
-                    width: 400, 
-                    child: Center(
+              ),
+              const SizedBox(height: 20.0),
+              if (_selectedScamType == 'Online Scam') ...[
+                const Text(
+                  '3. Select Platform:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Container(
+                  width: 400,
+                  child: Center(
                     child: DropdownButtonFormField<String>(
-                      value: _selectedPlatform, 
+                      value: _selectedPlatform,
                       onChanged: (String? newValue) {
                         setState(() {
                           _selectedPlatform = newValue;
                         });
                       },
                       items: <String>['Platform A', 'Platform B', 'Platform C']
-                        .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      decoration: InputDecoration(
-                        labelText: 'Select Platform', 
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      decoration: const InputDecoration(
+                        labelText: 'Select Platform',
                         labelStyle: TextStyle(
-                                fontSize: 14, 
-                                fontWeight: FontWeight.normal, 
-                              ),
-                            ),
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
                     ),
                   ),
-                  )
-                ],
-                if (_selectedScamType == 'Physical Scam') ...[
-                  Text('3. Select Location:', 
-                      style: TextStyle(fontWeight: FontWeight.bold),),
-                  Container(
-                    width: 400, 
-                    child: Center(
+                )
+              ],
+              if (_selectedScamType == 'Physical Scam') ...[
+                const Text(
+                  '3. Select Location:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Container(
+                  width: 400,
+                  child: Center(
                     child: DropdownButtonFormField<String>(
-                      value: _selectedLocation, 
+                      value: _selectedLocation,
                       onChanged: (String? newValue) {
                         setState(() {
                           _selectedLocation = newValue;
                         });
                       },
                       items: <String>['Location A', 'Location B', 'Location C']
-                        .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      decoration: InputDecoration(
-                        labelText: 'Select Location', 
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      decoration: const InputDecoration(
+                        labelText: 'Select Location',
                         labelStyle: TextStyle(
-                                fontSize: 14, 
-                                fontWeight: FontWeight.normal, 
-                              ),
-                            ),
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
                     ),
                   ),
-                  )
-                ],
+                )
               ],
+            ],
             if (_currentStep == 2) ...[
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-                  Text(
-                    '3. Scammer\'s Account Number / Phone Number',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  TextField(
-                    style: TextStyle(
-                      fontSize: 13, 
-                    ),
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Scammer\'s Account Number / Phone Number',
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      border: InputBorder.none, 
-                      labelStyle: TextStyle(
-                        fontSize: 12, 
-                      ),
-                    ),
-                    maxLines: 2,
-                  ),
-                  SizedBox(height: 20.0),
-                  Text(
-                    '4. Scammer\'s Name / Username',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-
-                  TextField(
-                    style: TextStyle(
-                      fontSize: 13, 
-                    ),
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Scammer\'s Name / Username',
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      border: InputBorder.none, 
-                      labelStyle: TextStyle(
-                        fontSize: 12, 
-                      ),
-                    ),
-                    maxLines: 2,
-                  ),
-                ],
-            //   ),
-            // ],
-            // Attachments
-            if (_currentStep == 3) ...[
-                Text(
-                    '5. How it happens',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-
-                  TextField(
-                    style: TextStyle(
-                      fontSize: 13, 
-                    ),
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      labelText: 'How it happens',
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      border: InputBorder.none, 
-                      labelStyle: TextStyle(
-                        fontSize: 12, 
-                      ),
-                    ),
-                    maxLines: 2,
-                  ),
-                  SizedBox(height: 20.0),
-                Text(
-                    '6. Why do you think you were targeted?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Column(
-      children: [
-        CheckboxListTile(
-          title: Text('Age', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-
-          ),
-          value: _isCheckedAge,
-          onChanged: (newValue) {
-            setState(() {
-              _isCheckedAge = newValue!;
-            });
-          },
-        ),
-        Visibility(
-  visible: _isCheckedAge,
-  child: DropdownButton<int>(
-    hint: Text('Select Age'),
-    value: _selectedAge,
-    onChanged: (newValue) {
-      setState(() {
-        _selectedAge = newValue;
-      });
-    },
-    items: List.generate(100, (index) => index + 1).map((int value) {
-      return DropdownMenuItem<int>(
-        value: value,
-        child: Text(value.toString()),
-      );
-    }).toList(),
-  ),
-),
-
-        CheckboxListTile(
-          title: Text('Gender', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-          ),
-          value: _isCheckedGender,
-          onChanged: (newValue) {
-            setState(() {
-              _isCheckedGender = newValue!;
-               if (!_isCheckedGender) {
-        // Reset the selected gender if the checkbox is unchecked
-        _selectedGender = null;
-      }
-            });
-          },
-        ),
-        Visibility(
-  visible: _isCheckedGender,
-  child: Column(
-    children: [
-      RadioListTile<String>(
-        title: Text('Male', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-        ),
-        value: 'male',
-        groupValue: _selectedGender,
-        onChanged: (value) {
-          setState(() {
-            _selectedGender = value;
-          });
-        },
-      ),
-      RadioListTile<String>(
-        title: Text('Female', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-        ),
-        value: 'female',
-        groupValue: _selectedGender,
-        onChanged: (value) {
-          setState(() {
-            _selectedGender = value;
-          });
-        },
-      ),
-    ],
-  ),
-),
-
-        CheckboxListTile(
-          title: Text('Income Level', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-          ),
-          value: _isCheckedIncome,
-          onChanged: (newValue) {
-            setState(() {
-              _isCheckedIncome = newValue!;
-            });
-          },
-        ),
-        Visibility(
-      visible: _isCheckedIncome,
-      child: Column(
-        children: [
-          TextField(
-              style: TextStyle(
-                fontSize: 13, 
-              ),
-              // controller: _questionController,
-              decoration: InputDecoration(
-                labelText: 'Income Level',
-                filled: true,
-                fillColor: Colors.grey[200],
-                border: InputBorder.none, 
-                labelStyle: TextStyle(
-                  fontSize: 12, 
+              const Text(
+                '3. Scammer\'s Account Number / Phone Number',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              maxLines: 2,
-            ),
-
-          SizedBox(height: 20.0),
-        ],
-      ),
-    ),
-        CheckboxListTile(
-          title: Text('Occupation', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-          ),
-          value: _isCheckedOccupation,
-          onChanged: (newValue) {
-            setState(() {
-              _isCheckedOccupation = newValue!;
-            });
-          },
-        ),
-        Visibility(
-      visible: _isCheckedOccupation,
-      child: Column(
-        children: [
-          TextField(
-                    style: TextStyle(
-                      fontSize: 13, 
-                    ),
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Occupation',
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      border: InputBorder.none, 
-                      labelStyle: TextStyle(
-                        fontSize: 12, 
-                      ),
-                    ),
-                    maxLines: 2,
-                  ),
-          SizedBox(height: 20.0),
-        ],
-      ),
-    ),
-        
-        CheckboxListTile(
-          title: Text('Geographic Location', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-          ),
-          value: _isCheckedLocation,
-          onChanged: (newValue) {
-            setState(() {
-              _isCheckedLocation = newValue!;
-            });
-          },
-        ),
-        Visibility(
-              visible: _isCheckedLocation,
-              child: Column(
-                children: [
-                  SizedBox(height: 20),
-
-                  TextField(
-                    style: TextStyle(
-                      fontSize: 13, 
-                    ),
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Geographic Location',
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      border: InputBorder.none, 
-                      labelStyle: TextStyle(
-                        fontSize: 12, 
-                      ),
-                    ),
-                    maxLines: 2,
-                  ),
-                  SizedBox(height: 20.0),
-                ],
-              ),
-            ),
-
-        CheckboxListTile(
-          title: Text('Education Level', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-          ),
-          value: _isCheckedEducation,
-          onChanged: (newValue) {
-            setState(() {
-              _isCheckedEducation = newValue!;
-            });
-          },
-        ),
-        Visibility(
-      visible: _isCheckedEducation,
-      child: Column(
-        children: [
-          TextField(
-              style: TextStyle(
-                fontSize: 13, 
-              ),
-              // controller: _questionController,
-              decoration: InputDecoration(
-                labelText: 'Education Level',
-                filled: true,
-                fillColor: Colors.grey[200],
-                border: InputBorder.none, 
-                labelStyle: TextStyle(
-                  fontSize: 12, 
-                ),
-              ),
-              maxLines: 2,
-            ),
-
-          SizedBox(height: 20.0),
-        ],
-      ),
-    ),
-
-        CheckboxListTile(
-          title: Text('Social Media Presence', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-          ),
-          value: _isCheckedSocialMedia,
-          onChanged: (newValue) {
-            setState(() {
-              _isCheckedSocialMedia = newValue!;
-            });
-          },
-        ),
-        Visibility(
-      visible: _isCheckedSocialMedia,
-      child: Column(
-        children: [
-            SizedBox(height: 20),
-
-          TextField(
-                    style: TextStyle(
-                      fontSize: 13, 
-                    ),
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Social Media Presence',
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      border: InputBorder.none, 
-                      labelStyle: TextStyle(
-                        fontSize: 12, 
-                      ),
-                    ),
-                    maxLines: 2,
-                  ),
-          SizedBox(height: 20.0),
-        ],
-      ),
-    ),
-        CheckboxListTile(
-          title: Text('Family Status', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-          ),
-          value: _isCheckedFamilyStatus,
-          onChanged: (newValue) {
-            setState(() {
-              _isCheckedFamilyStatus = newValue!;
-            });
-          },
-        ), Visibility(
-      visible: _isCheckedFamilyStatus,
-      child: Column(
-        children: [
-            SizedBox(height: 20),
-
-          TextField(
-                    style: TextStyle(
-                      fontSize: 13, 
-                    ),
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Family Status',
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      border: InputBorder.none, 
-                      labelStyle: TextStyle(
-                        fontSize: 12, 
-                      ),
-                    ),
-                    maxLines: 2,
-                  ),
-          SizedBox(height: 20.0),
-        ],
-      ),
-    ),
-        CheckboxListTile(
-      title: Text('Other', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-      ),
-      value: _isCheckedOther,
-      onChanged: (newValue) {
-        setState(() {
-          _isCheckedOther = newValue!;
-        });
-      },
-    ),
-    Visibility(
-      visible: _isCheckedOther,
-      child: Column(
-        children: [
-            SizedBox(height: 20),
-          TextField(
-                    style: TextStyle(
-                      fontSize: 13, 
-                    ),
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Other',
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      border: InputBorder.none, 
-                      labelStyle: TextStyle(
-                        fontSize: 12, 
-                      ),
-                    ),
-                    maxLines: 2,
-                  ),
-          SizedBox(height: 20.0),
-        ],
-      ),
-    ),
-
-        // Add more CheckboxListTile widgets as needed
-      ],
-    ),
-              SizedBox(height: 20.0),
-          Text(
-                '7. Ways to prevent',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),              ),
-            SizedBox(height: 20),
-
+              const SizedBox(height: 20),
               TextField(
-                    style: TextStyle(
-                      fontSize: 13, 
-                    ),
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Ways to prevent',
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      border: InputBorder.none, 
-                      labelStyle: TextStyle(
-                        fontSize: 12, 
-                      ),
-                    ),
-                    maxLines: 2,
+                style: const TextStyle(
+                  fontSize: 13,
+                ),
+                controller: _titleController,
+                decoration: InputDecoration(
+                  labelText: 'Scammer\'s Account Number / Phone Number',
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  border: InputBorder.none,
+                  labelStyle: const TextStyle(
+                    fontSize: 12,
                   ),
-              SizedBox(height: 20.0),
-
-
+                ),
+                maxLines: 2,
+              ),
+              const SizedBox(height: 20.0),
+              const Text(
+                '4. Scammer\'s Name / Username',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                style: const TextStyle(
+                  fontSize: 13,
+                ),
+                controller: _titleController,
+                decoration: InputDecoration(
+                  labelText: 'Scammer\'s Name / Username',
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  border: InputBorder.none,
+                  labelStyle: const TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                maxLines: 2,
+              ),
+            ],
+            if (_currentStep == 3) ...[
+              const Text(
+                '5. How it happens',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                style: const TextStyle(
+                  fontSize: 13,
+                ),
+                controller: _titleController,
+                decoration: InputDecoration(
+                  labelText: 'How it happens',
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  border: InputBorder.none,
+                  labelStyle: const TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                maxLines: 2,
+              ),
+              const SizedBox(height: 20.0),
+              const Text(
+                '6. Why do you think you were targeted?',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Column(
+                children: [
+                  CheckboxListTile(
+                    title: const Text(
+                      'Age',
+                      style: TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.normal),
+                    ),
+                    value: _isCheckedAge,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _isCheckedAge = newValue!;
+                      });
+                    },
+                  ),
+                  Visibility(
+                    visible: _isCheckedAge,
+                    child: DropdownButton<int>(
+                      hint: const Text('Select Age'),
+                      value: _selectedAge,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedAge = newValue;
+                        });
+                      },
+                      items: List.generate(100, (index) => index + 1)
+                          .map((int value) {
+                        return DropdownMenuItem<int>(
+                          value: value,
+                          child: Text(value.toString()),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  CheckboxListTile(
+                    title: const Text(
+                      'Gender',
+                      style: TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.normal),
+                    ),
+                    value: _isCheckedGender,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _isCheckedGender = newValue!;
+                        if (!_isCheckedGender) {
+                          _selectedGender = null;
+                        }
+                      });
+                    },
+                  ),
+                  Visibility(
+                    visible: _isCheckedGender,
+                    child: Column(
+                      children: [
+                        RadioListTile<String>(
+                          title: const Text(
+                            'Male',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.normal),
+                          ),
+                          value: 'male',
+                          groupValue: _selectedGender,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedGender = value;
+                            });
+                          },
+                        ),
+                        RadioListTile<String>(
+                          title: const Text(
+                            'Female',
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.normal),
+                          ),
+                          value: 'female',
+                          groupValue: _selectedGender,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedGender = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  CheckboxListTile(
+                    title: const Text(
+                      'Income Level',
+                      style: TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.normal),
+                    ),
+                    value: _isCheckedIncome,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _isCheckedIncome = newValue!;
+                      });
+                    },
+                  ),
+                  Visibility(
+                    visible: _isCheckedIncome,
+                    child: Column(
+                      children: [
+                        TextField(
+                          style: const TextStyle(
+                            fontSize: 13,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: 'Income Level',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: InputBorder.none,
+                            labelStyle: const TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          maxLines: 2,
+                        ),
+                        const SizedBox(height: 20.0),
+                      ],
+                    ),
+                  ),
+                  CheckboxListTile(
+                    title: const Text(
+                      'Occupation',
+                      style: TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.normal),
+                    ),
+                    value: _isCheckedOccupation,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _isCheckedOccupation = newValue!;
+                      });
+                    },
+                  ),
+                  Visibility(
+                    visible: _isCheckedOccupation,
+                    child: Column(
+                      children: [
+                        TextField(
+                          style: const TextStyle(
+                            fontSize: 13,
+                          ),
+                          controller: _titleController,
+                          decoration: InputDecoration(
+                            labelText: 'Occupation',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: InputBorder.none,
+                            labelStyle: const TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          maxLines: 2,
+                        ),
+                        const SizedBox(height: 20.0),
+                      ],
+                    ),
+                  ),
+                  CheckboxListTile(
+                    title: const Text(
+                      'Geographic Location',
+                      style: TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.normal),
+                    ),
+                    value: _isCheckedLocation,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _isCheckedLocation = newValue!;
+                      });
+                    },
+                  ),
+                  Visibility(
+                    visible: _isCheckedLocation,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        TextField(
+                          style: const TextStyle(
+                            fontSize: 13,
+                          ),
+                          controller: _titleController,
+                          decoration: InputDecoration(
+                            labelText: 'Geographic Location',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: InputBorder.none,
+                            labelStyle: const TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          maxLines: 2,
+                        ),
+                        const SizedBox(height: 20.0),
+                      ],
+                    ),
+                  ),
+                  CheckboxListTile(
+                    title: const Text(
+                      'Education Level',
+                      style: TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.normal),
+                    ),
+                    value: _isCheckedEducation,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _isCheckedEducation = newValue!;
+                      });
+                    },
+                  ),
+                  Visibility(
+                    visible: _isCheckedEducation,
+                    child: Column(
+                      children: [
+                        TextField(
+                          style: const TextStyle(
+                            fontSize: 13,
+                          ),
+                          decoration: InputDecoration(
+                            labelText: 'Education Level',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: InputBorder.none,
+                            labelStyle: const TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          maxLines: 2,
+                        ),
+                        const SizedBox(height: 20.0),
+                      ],
+                    ),
+                  ),
+                  CheckboxListTile(
+                    title: const Text(
+                      'Social Media Presence',
+                      style: TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.normal),
+                    ),
+                    value: _isCheckedSocialMedia,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _isCheckedSocialMedia = newValue!;
+                      });
+                    },
+                  ),
+                  Visibility(
+                    visible: _isCheckedSocialMedia,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        TextField(
+                          style: const TextStyle(
+                            fontSize: 13,
+                          ),
+                          controller: _titleController,
+                          decoration: InputDecoration(
+                            labelText: 'Social Media Presence',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: InputBorder.none,
+                            labelStyle: const TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          maxLines: 2,
+                        ),
+                        const SizedBox(height: 20.0),
+                      ],
+                    ),
+                  ),
+                  CheckboxListTile(
+                    title: const Text(
+                      'Family Status',
+                      style: TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.normal),
+                    ),
+                    value: _isCheckedFamilyStatus,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _isCheckedFamilyStatus = newValue!;
+                      });
+                    },
+                  ),
+                  Visibility(
+                    visible: _isCheckedFamilyStatus,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        TextField(
+                          style: const TextStyle(
+                            fontSize: 13,
+                          ),
+                          controller: _titleController,
+                          decoration: InputDecoration(
+                            labelText: 'Family Status',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: InputBorder.none,
+                            labelStyle: const TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          maxLines: 2,
+                        ),
+                        const SizedBox(height: 20.0),
+                      ],
+                    ),
+                  ),
+                  CheckboxListTile(
+                    title: const Text(
+                      'Other',
+                      style: TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.normal),
+                    ),
+                    value: _isCheckedOther,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _isCheckedOther = newValue!;
+                      });
+                    },
+                  ),
+                  Visibility(
+                    visible: _isCheckedOther,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        TextField(
+                          style: const TextStyle(
+                            fontSize: 13,
+                          ),
+                          controller: _titleController,
+                          decoration: InputDecoration(
+                            labelText: 'Other',
+                            filled: true,
+                            fillColor: Colors.grey[200],
+                            border: InputBorder.none,
+                            labelStyle: const TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                          maxLines: 2,
+                        ),
+                        const SizedBox(height: 20.0),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20.0),
+              const Text(
+                '7. Ways to prevent',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                style: const TextStyle(
+                  fontSize: 13,
+                ),
+                controller: _titleController,
+                decoration: InputDecoration(
+                  labelText: 'Ways to prevent',
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  border: InputBorder.none,
+                  labelStyle: const TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                maxLines: 2,
+              ),
+              const SizedBox(height: 20.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     '9. Attachments (${_attachments.length})',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   TextButton(
                     onPressed: _pickFiles,
-                    child: Text('Add', 
-                    style: TextStyle(
-                      color: Colors.blue
-                    ),),
+                    child: const Text(
+                      'Add',
+                      style: TextStyle(color: Colors.blue),
+                    ),
                   ),
                 ],
               ),
-              SizedBox(height: 20.0),
-              // Display the list of attachments
+              const SizedBox(height: 20.0),
               Wrap(
-                // spacing: 32.0, 
-                spacing: 20.0, 
-                runSpacing: 20.0, // spacing between rows
+                spacing: 20.0,
+                runSpacing: 20.0,
                 children: List.generate(_attachments.length, (index) {
                   final file = _attachments[index];
                   return SizedBox(
-                    width: (MediaQuery.of(context).size.width) / 2.4, 
+                    width: (MediaQuery.of(context).size.width) / 2.4,
                     child: _buildPreview(index, file),
                   );
                 }).toList(),
               ),
-
-        SizedBox(height: 20.0),
-        Text(
+              const SizedBox(height: 20.0),
+              const Text(
                 '10. When did it happen',
-              style: TextStyle(
-                fontSize: 14, 
-                fontWeight: FontWeight.bold
-              ),              ),
-            SizedBox(height: 20),
-        Row(
-  children: [
-    Expanded(
-      child: DateTimeField(
-        format: DateFormat("yyyy-MM-dd"),
-        decoration: InputDecoration(
-          labelText: 'Date',
-          labelStyle: TextStyle(fontSize: 12.0),
-          prefixIcon: Icon(Icons.calendar_today, size: 15),
-          border: InputBorder.none,
-        ),
-        style: TextStyle(fontSize: 11.0), // Adjust font size for date
-        onChanged: (value) {
-          setState(() {
-            _selectedDate = value;
-          });
-        },
-        onShowPicker: (context, currentValue) {
-          return showDatePicker(
-            context: context,
-            initialDate: currentValue ?? DateTime.now(),
-            firstDate: DateTime(1900),
-            lastDate: DateTime.now(),
-          );
-        },
-      ),
-    ),
-    SizedBox(width: 0.0),
-    Expanded(
-      child: DateTimeField(
-        format: DateFormat("HH:mm"),
-        decoration: InputDecoration(
-          labelText: 'Time',
-          labelStyle: TextStyle(fontSize: 12.0),
-          prefixIcon: Icon(Icons.access_time, size: 15),
-          border: InputBorder.none,
-        ),
-        style: TextStyle(fontSize: 11.0), // Adjust font size for time
-        onChanged: (value) {
-          setState(() {
-            _selectedTime = value as TimeOfDay?;
-          });
-        },
-        onShowPicker: (context, currentValue) async {
-          final time = await showTimePicker(
-            context: context,
-            initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
-          );
-          return time != null ? DateTimeField.convert(time) : currentValue;
-        },
-      ),
-    ),
-  ],
-),
-
-
-
-        ],
-            // Why do you think they target you? and Ways to prevent
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: DateTimeField(
+                      format: DateFormat("yyyy-MM-dd"),
+                      decoration: const InputDecoration(
+                        labelText: 'Date',
+                        labelStyle: TextStyle(fontSize: 12.0),
+                        prefixIcon: Icon(Icons.calendar_today, size: 15),
+                        border: InputBorder.none,
+                      ),
+                      style: const TextStyle(fontSize: 11.0),
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedDate = value;
+                        });
+                      },
+                      onShowPicker: (context, currentValue) {
+                        return showDatePicker(
+                          context: context,
+                          initialDate: currentValue ?? DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 0.0),
+                  Expanded(
+                    child: DateTimeField(
+                      format: DateFormat("HH:mm"),
+                      decoration: const InputDecoration(
+                        labelText: 'Time',
+                        labelStyle: TextStyle(fontSize: 12.0),
+                        prefixIcon: Icon(Icons.access_time, size: 15),
+                        border: InputBorder.none,
+                      ),
+                      style: const TextStyle(fontSize: 11.0),
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedTime = value as TimeOfDay?;
+                        });
+                      },
+                      onShowPicker: (context, currentValue) async {
+                        final time = await showTimePicker(
+                          context: context,
+                          initialTime: TimeOfDay.fromDateTime(
+                              currentValue ?? DateTime.now()),
+                        );
+                        return time != null
+                            ? DateTimeField.convert(time)
+                            : currentValue;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ],
             if (_currentStep == 4) ...[
-              Text(
-                '11. Scam Tactic', 
+              const Text(
+                '11. Scam Tactic',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 20.0,),
-              // Column(
-                // children: [
-                  // Expanded(
-                  //   child: 
-                    TextField(
-                    style: TextStyle(
-                      fontSize: 13, 
-                    ),
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Scam Tactic',
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                      border: InputBorder.none, 
-                      labelStyle: TextStyle(
-                        fontSize: 12, 
+              const SizedBox(
+                height: 20.0,
+              ),
+              TextField(
+                style: const TextStyle(
+                  fontSize: 13,
+                ),
+                controller: _titleController,
+                decoration: InputDecoration(
+                  labelText: 'Scam Tactic',
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  border: InputBorder.none,
+                  labelStyle: const TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+                maxLines: 2,
+              ),
+              const SizedBox(height: 8.0),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  side: const BorderSide(color: Colors.black, width: 1),
+                ),
+                child: const Text('Auto Detect Scam Tactic'),
+              ),
+              const SizedBox(
+                height: 20.0,
+              ),
+              const Text(
+                '12. Did you get scammed?',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Row(
+                children: [
+                  Radio<String>(
+                    value: 'Suspicious Scam',
+                    groupValue: _selectedScamType,
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedScamType = value!;
+                      });
+                    },
+                  ),
+                  const Text(
+                    'Suspicious Scam',
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Radio<String>(
+                    value: 'Confirmed Scam',
+                    groupValue: _selectedScamType,
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedScamType = value!;
+                      });
+                    },
+                  ),
+                  const Text(
+                    'Confirmed Scam',
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+                  ),
+                ],
+              ),
+            ],
+            const SizedBox(height: 20.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (_currentStep > 1)
+                  Container(
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          _currentStep--;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        backgroundColor: Colors.white,
+                        side: const BorderSide(color: Colors.black, width: 1),
+                      ),
+                      child: const Text(
+                        'Back',
+                        style: TextStyle(color: Colors.black),
                       ),
                     ),
-                    maxLines: 2,
                   ),
-                  // ),
-                  SizedBox(height: 8.0), // Adjust the width as needed
-                  ElevatedButton(
-                  onPressed: () {
-                    // Button onPressed callback
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white, // Background color
-                    onPrimary: Colors.black, // Text color
-                    side: BorderSide(color: Colors.black, width: 1), // Border color and width
+                if (_currentStep < 4)
+                  Container(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        side: const BorderSide(color: Colors.black, width: 2),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _currentStep++;
+                        });
+                      },
+                      child: const Text(
+                        'Next',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
-                  child: Text('Auto Detect Scam Tactic'),
-                ),
-
-                // ],
-              // ),
-              SizedBox(height: 20.0,),
-              Text(
-          '12. Did you get scammed?',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        Row(
-          children: [
-            Radio<String>(
-              value: 'Suspicious Scam',
-              groupValue: _selectedScamType,
-              onChanged: (value) {
-                setState(() {
-                  _selectedScamType = value!;
-                });
-              },
-            ),
-            Text('Suspicious Scam', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-            ),
-          ],
-        ),
-
-        Row(
-          children: [
-            Radio<String>(
-              value: 'Confirmed Scam',
-              groupValue: _selectedScamType,
-              onChanged: (value) {
-                setState(() {
-                  _selectedScamType = value!;
-                });
-              },
-            ),
-            Text('Confirmed Scam', 
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
-            ),
-                      ],
-        ),
-          
-        
-
-            ],
-            SizedBox(height: 20.0),
-            
-Row(
-  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  children: [
-    // Back button
-    if (_currentStep > 1)
-      Container(
-        child: TextButton(
-          onPressed: () {
-            setState(() {
-              _currentStep--;
-            });
-          },
-          style: ElevatedButton.styleFrom(
-                    primary: Colors.white, // Background color
-                    onPrimary: Colors.black, // Text color
-                    side: BorderSide(color: Colors.black, width: 1), // Border color and width
+                if (_currentStep == 4)
+                  Container(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        'Submit',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
-          child: Text(
-            'Back',
-            style: TextStyle(color: Colors.black), // Set text color
-          ),
-        ),
-      ),
-    // Next button
-    if (_currentStep < 4)
-      Container(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            primary: Colors.black, // Background color
-            side: BorderSide(color: Colors.black, width: 2), // Border color and width
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20), // Set the border radius here
-            ),
-          ),
-          onPressed: () {
-            setState(() {
-              _currentStep++;
-            });
-          },
-          child: Text(
-            'Next',
-            style: TextStyle(color: Colors.white), // Set text color
-          ),
-        ),
-      ),
-    // Submit button
-    if (_currentStep == 4)
-      Container(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            primary: Colors.black, // Change the background color here
-          ),
-          onPressed: () {
-            // Implement submission functionality
-          },
-          child: Text(
-            'Submit',
-            style: TextStyle(color: Colors.white), // Set text color
-          ),
-        ),
-      ),
-
-  ],
-)
-        
+              ],
+            )
           ],
         ),
       ),
     );
   }
 }
-
 
 class StepWidget extends StatelessWidget {
   final int stepNumber;
@@ -1043,14 +1009,14 @@ class StepWidget extends StatelessWidget {
           child: Center(
             child: Text(
               '$stepNumber',
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
         ),
-        SizedBox(height: 8.0),
+        const SizedBox(height: 8.0),
         Text(
           _getStepDescription(stepNumber),
           textAlign: TextAlign.center,
@@ -1062,13 +1028,13 @@ class StepWidget extends StatelessWidget {
   String _getStepDescription(int step) {
     switch (step) {
       case 1:
-        return 'Title'; 
+        return 'Title';
       case 2:
-        return 'Scammer'; 
+        return 'Scammer';
       case 3:
-        return 'Details'; 
+        return 'Details';
       case 4:
-        return 'Tactic'; 
+        return 'Tactic';
       default:
         return '';
     }

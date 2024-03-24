@@ -3,19 +3,17 @@ import 'Ranking.dart';
 
 class RankingHeaderPage extends StatefulWidget {
   @override
-  _RankingHeaderPageState createState() =>
-      _RankingHeaderPageState();
+  _RankingHeaderPageState createState() => _RankingHeaderPageState();
 }
 
-class _RankingHeaderPageState
-    extends State<RankingHeaderPage> {
+class _RankingHeaderPageState extends State<RankingHeaderPage> {
   String selectedCategory = 'All';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
+        leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
@@ -40,13 +38,14 @@ class _RankingHeaderPageState
                     children: [
                       Text(
                         '100',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 4),
                       Icon(
                         Icons.monetization_on,
                         size: 16,
-                        color: Colors.amber, 
+                        color: Colors.amber,
                       ),
                     ],
                   ),
@@ -55,7 +54,8 @@ class _RankingHeaderPageState
             ),
           ],
         ),
-      ),      body: SingleChildScrollView(
+      ),
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -96,9 +96,9 @@ class _RankingHeaderPageState
           backgroundColor: MaterialStateProperty.resolveWith<Color>(
             (states) {
               if (selectedCategory == title) {
-                return Colors.white; // Color when selected
+                return Colors.white;
               } else {
-                return Colors.black; // Default color
+                return Colors.black;
               }
             },
           ),
